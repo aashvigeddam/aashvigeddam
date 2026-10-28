@@ -1,14 +1,14 @@
 {
  "user": "aashvigeddam",
  "stats": {
-  "total": 187,
+  "total": 170,
   "current_streak": 1,
   "longest_streak": 7,
   "best_day": {
    "date": "2026-08-25",
    "count": 29
   },
-  "active_days": 24
+  "active_days": 22
  },
  "days": [
   {
@@ -1153,13 +1153,13 @@
   },
   {
    "date": "2026-06-11",
-   "level": 3,
-   "count": 10
+   "level": 0,
+   "count": 0
   },
   {
    "date": "2026-06-12",
-   "level": 3,
-   "count": 9
+   "level": 0,
+   "count": 0
   },
   {
    "date": "2026-06-13",
@@ -1848,8 +1848,8 @@
   },
   {
    "date": "2026-10-28",
-   "level": 1,
-   "count": 2
+   "level": 2,
+   "count": 4
   }
  ]
 }
