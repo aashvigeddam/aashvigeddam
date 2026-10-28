@@ -1,0 +1,64 @@
+name: update profile art
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # daily, ~11pm Pacific
+  workflow_dispatch:
+    inputs:
+      portrait:
+        description: "Rebuild the ASCII portrait too"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-art
+  cancel-in-progress: false
+
+jobs:
+  art:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Refresh contribution heatmap
+        run: |
+          python scripts/fetch_contributions.py
+          python scripts/render_heatmap_svg.py
+
+      # The portrait only rebuilds when it's missing, when photo/ changed,
+      # or when you tick the box on a manual run.
+      - name: Decide whether to rebuild portrait
+        id: p
+        run: |
+          if [ ! -f assets/portrait.svg ] \
+             || [ "${{ inputs.portrait }}" = "true" ] \
+             || git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -qE '^(photo/|scripts/make_portrait.py|scripts/theme.py)'; then
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build ASCII portrait
+        if: steps.p.outputs.build == 'true'
+        run: |
+          pip install -r scripts/requirements-portrait.txt
+          python scripts/make_portrait.py
+
+      - name: Rebuild info card
+        run: python scripts/make_info_card.py
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh profile art [skip ci]"
+          file_pattern: "data/contributions.json assets/*.svg"
