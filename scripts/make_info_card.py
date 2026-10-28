@@ -28,7 +28,12 @@ STATIC = os.environ.get("STATIC") == "1"
 
 def build():
     lines = []  # (svg text element)
-    y = BAR_H + 38
+    val_x = X0 + KEY_COLS * CHAR_W
+    wrap_cols = int((W - val_x - 20) / CHAR_W)
+    n_rows = sum(len(textwrap.wrap(v, wrap_cols) or [""]) for _, v in ROWS)
+    content_h = 2 * LH + 4 + n_rows * LH + 14 + LH + 6 + LH
+    # centre the block vertically in the window body
+    y = BAR_H + max(38, (H - BAR_H - content_h) / 2 + 12)
 
     header = f"{PROMPT_USER}@github"
     lines.append(
@@ -39,8 +44,6 @@ def build():
     lines.append(f'<text x="{X0}" y="{y}" fill="{MUTED}">{"-" * len(header)}</text>')
     y += LH + 4
 
-    val_x = X0 + KEY_COLS * CHAR_W
-    wrap_cols = int((W - val_x - 20) / CHAR_W)
     for key, val in ROWS:
         chunks = textwrap.wrap(val, wrap_cols) or [""]
         for i, chunk in enumerate(chunks):
