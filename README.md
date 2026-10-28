@@ -11,7 +11,7 @@
 <table>
 <tr>
 <td valign="top" width="370"><img src="assets/portrait.svg" width="370" alt="ASCII portrait of Aashvi Geddam"></td>
-<td valign="top" width="490"><img src="assets/info-card.svg" width="490" alt="Aashvi Geddam: Cognitive Science, Class of 2030. Founder of Magnus United. EEG seizure detection research. Interested in human-AI interaction and UX research."></td>
+<td valign="top" width="490"><img src="assets/info-card.svg" width="490" alt="Aashvi Geddam: Cognitive Science, Class of 2030. Founder of Magnus United. Interested in human-AI interaction, UX research and PM."></td>
 </tr>
 </table>
 

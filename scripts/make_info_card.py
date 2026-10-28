@@ -12,9 +12,8 @@ from theme import ACCENT, DOTS, FONT, MUTED, PALETTE, PROMPT_USER, TEXT, BAR_H, 
 ROWS = [
     ("Name", "Aashvi Geddam"),
     ("Now", "Cognitive Science, Class of 2030"),
-    ("Founder", "Magnus United, an international donation nonprofit"),
-    ("Research", "EEG seizure detection on the CHB-MIT dataset"),
-    ("Interests", "human-AI interaction, UX research"),
+    ("Founder", "Magnus United"),
+    ("Interests", "human-AI interaction, UX research, PM"),
     ("Site", "aashvigeddam.com"),
 ]
 
